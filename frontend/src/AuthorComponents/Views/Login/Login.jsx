@@ -5,7 +5,6 @@ import { apiBaseURL } from "../../../Config.js";
 import AuthorAuthContext from "../../AuthorAuthContext";
 
 export default function Login() {
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -18,7 +17,7 @@ export default function Login() {
             email,
             password
         }
-        axios.post(`${apiBaseURL}/author/login`, loginData, {
+        await axios.post(`${apiBaseURL}/author/login`, loginData, {
             headers: {
                 "Content-Type": "application/json",
             }
@@ -59,7 +58,7 @@ export default function Login() {
                         </form>
                         <hr className="mt-4" />
                         <div className="col-12">
-                            <p className="text-center mb-0">Have not account yet? <Link to="/author/register">Signup</Link></p>
+                            <p className="text-center mb-0"><Link to="/author/register">Signup?</Link></p>
                         </div>
                     </div>
                 </div>

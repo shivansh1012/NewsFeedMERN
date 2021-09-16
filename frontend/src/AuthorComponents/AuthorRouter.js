@@ -6,6 +6,8 @@ import AuthorAuthContext from "./AuthorAuthContext.js";
 import Login from "./Views/Login/Login";
 import Register from "./Views/Register/Register";
 import NewsUpload from "./Views/NewsUpload/NewsUpload.jsx";
+import NewsUpdate from "./Views/NewsUpdate/NewsUpdate.jsx";
+import NewsList from "./Views/NewsList/NewsList.jsx";
 import NavBar from "./Layout/NavBar.js";
 
 export default function AuthorRouter() {
@@ -17,8 +19,12 @@ export default function AuthorRouter() {
             {authorLoggedIn === true && (
                 <>
                     <Route exact path={`${path}`}>
+                        <NewsList />
+                    </Route>
+                    <Route exact path={`${path}/newnews`}>
                         <NewsUpload />
                     </Route>
+                    <Route exact path={`${path}/news/update/:id`} component={NewsUpdate}/>
                 </>
             )}
             {authorLoggedIn === false && (

@@ -1,6 +1,6 @@
 //Modules
 import React, { useContext } from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { apiBaseURL } from "../../Config.js";
 
@@ -19,12 +19,12 @@ export default function NavBar() {
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">NewsFeed</Link>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#links">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div className="navbar-nav">
-                        <Link className="nav-link" to="/">Home</Link>
+                <div className="collapse navbar-collapse" id="links">
+                    <div className="navbar-nav ms-auto">
+                        <Link className="nav-link" to="/">NewsFeed</Link>
                         {authorLoggedIn === false && (
                             <>
                                 <Link className="nav-link" to="/author">AuthorLogin</Link>
@@ -33,10 +33,12 @@ export default function NavBar() {
                         )}
                         {authorLoggedIn === true && (
                             <>
+                                <Link className="nav-link" to="/author">Home</Link>
+                                <Link className="nav-link" to="/author/newnews">New News</Link>
                                 <Link className="nav-link" onClick={handleLogout} to="/author">Logout</Link>
                             </>
                         )}
-                        
+
                     </div>
                 </div>
             </div>

@@ -68,6 +68,23 @@ router.post("/login", async (req, res) => {
     }
 })
 
+router.get("/news", authorAuth, async (req, res) => {
+    try {
+        const author = req.authorInfo["_id"];
+
+        const authorDetails = await Author.findOne({ _id: author });
+        let newsList = [];
+        for (const article of authorDetails.articles) {
+            const newsDetails = await News.findOne({ _id: article });
+            newsList.push(newsDetails);
+        }
+        res.status(200).json({ newsList: newsList });
+    } catch (error) {
+        console.error(e);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+
 router.post("/news", authorAuth, async (req, res) => {
     try {
         const { title, category, tags, body } = req.body;
@@ -89,6 +106,27 @@ router.post("/news", authorAuth, async (req, res) => {
         )
 
         res.status(200).json({ message: "News Upload Success" });
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+
+router.patch("/news", authorAuth, async (req, res) => {
+    try {
+        const { _id, title, category, tags, body } = req.body;
+
+        await News.findOneAndUpdate(
+            { _id: _id },
+            {
+                title,
+                category,
+                tags,
+                body
+            }
+        )
+
+        res.status(200).json({ message: "News Update Success" });
     } catch (e) {
         console.error(e);
         res.status(500).json({ message: "Internal Server Error" });

@@ -1,5 +1,5 @@
 //Modules
-import React, { useContext } from "react";
+import React from "react";
 import { Route, useRouteMatch } from "react-router-dom";
 
 import NavBar from "./Layout/NavBar.js";
@@ -8,7 +8,7 @@ import NewsBody from "./NewsBody.jsx";
 
 export default function AuthorRouter() {
     const { path } = useRouteMatch();
-    console.log(path)
+    // console.log(path)
     return (
         <>
             <NavBar/>
